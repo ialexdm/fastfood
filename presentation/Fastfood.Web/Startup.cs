@@ -1,3 +1,4 @@
+using Fastfood.Memory;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -24,6 +25,7 @@ namespace Fastfood.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSingleton<IDishRepository, DishRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

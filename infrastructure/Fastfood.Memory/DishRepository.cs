@@ -14,7 +14,7 @@ namespace Fastfood.Memory
         };
         public Dish[] GetAllByTitle(string titlePart)
         {
-            return dishes.Where(dish => dish.Name.Contains(titlePart)).ToArray();
+            return dishes.Where(dish => dish.Name.ToLower().Contains(titlePart)).ToArray();
         }
     }
 }
