@@ -31,14 +31,14 @@ namespace Fastfood.Tests
         [Fact]
         public void GetAllByQuery_WithAuthor_CallsGetAllByNameOrCategory()
         {
-            var idIfTtk = 1;
-            var ifIfNameOrCategory = 2;
+            var idOfTtkSearch = 1;
+            var idOfNameOrCategorySearch = 2;
             var dishRepositoryStub = new Mock<IDishRepository>();
             dishRepositoryStub.Setup(x => x.GetByTtk(It.IsAny<string>()))
-                .Returns(new[] { new Dish(idIfTtk, "", "", "", "", 0m) });
+                .Returns(new[] { new Dish(idOfTtkSearch, "", "", "", "", 1.00m) });
 
             dishRepositoryStub.Setup(x => x.GetAllByNameOrCategory(It.IsAny<string>()))
-                .Returns(new[] { new Dish(ifIfNameOrCategory, "", "", "", "", 0m) });
+                .Returns(new[] { new Dish(idOfNameOrCategorySearch, "", "", "", "", 1.00m) });
 
             var dishService = new DishService(dishRepositoryStub.Object);
             var invalidTtk = "1234ttk";

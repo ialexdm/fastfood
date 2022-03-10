@@ -37,6 +37,11 @@ namespace Fastfood.Memory
             dish.Name.ToLower().Contains(query.ToLower())).ToArray();
         }
 
+        public Dish GetById(int id)
+        {
+            return dishes.Single(dish => dish.Id == id);
+        }
+
         public Dish[] GetByTtk(string ttk)
         {
             return dishes.Where(dish => dish.Ttk.Replace(" ","") == ttk.Replace(" ","").Replace("-","").ToUpper()).ToArray();
