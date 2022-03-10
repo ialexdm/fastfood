@@ -26,6 +26,7 @@ namespace Fastfood.Web
         {
             services.AddControllersWithViews();
             services.AddSingleton<IDishRepository, DishRepository>();
+            services.AddSingleton<DishService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

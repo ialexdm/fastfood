@@ -7,14 +7,33 @@ namespace Fastfood.Memory
     {
         private readonly Dish[] dishes = new[]
         {
-            new Dish(1, "Pizza Margarita"),
-            new Dish(2, "Pizza Peperoni"),
-            new Dish(3, "Pizza Three Cheeses"),
-            new Dish(4, "Caesar salad")
+            new Dish(1,
+                "Margherita",
+                "Pizza",
+                "TTK 2117"),
+            new Dish(2,
+                "Pepperoni",
+                "Pizza",
+                "TTK 2115"),
+            new Dish(3,
+                "Three Cheeses",
+                "Pizza",
+                "TTK 2281"),
+            new Dish(4,
+                "Caesar",
+                "Salad",
+                "TTK 3131")
         };
-        public Dish[] GetAllByTitle(string titlePart)
+
+        public Dish[] GetAllByNameOrCategory(string query)
         {
-            return dishes.Where(dish => dish.Name.ToLower().Contains(titlePart)).ToArray();
+            return dishes.Where(dish => dish.Category.ToLower().Contains(query.ToLower()) ||
+            dish.Name.ToLower().Contains(query.ToLower())).ToArray();
+        }
+
+        public Dish[] GetByTtk(string ttk)
+        {
+            return dishes.Where(dish => dish.Ttk.Replace(" ","") == ttk.Replace(" ","").Replace("-","").ToUpper()).ToArray();
         }
     }
 }

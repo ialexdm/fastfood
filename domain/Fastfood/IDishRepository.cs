@@ -8,6 +8,7 @@ namespace Fastfood
 {
     public interface IDishRepository
     {
-        Dish[] GetAllByTitle(string titlePart);
+        Dish[] GetAllByNameOrCategory(string nameOrCategory);
+        Dish[] GetByTtk(string ttk);
     }
 }
