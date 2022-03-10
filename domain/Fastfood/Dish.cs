@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace Fastfood
 {
@@ -6,11 +7,36 @@ namespace Fastfood
     {
         public int Id { get; }
         public string Name { get; }
+        public string Category { get; }
+        public string Ttk { get; }
 
-        public Dish(int id, string name)
+
+
+        public Dish(int id, string name, string category, string ttk)
         {
             Id = id;
             Name = name;
+            Category = category;
+            Ttk = ttk;
+        }
+
+        internal static bool IsTtk(string s)
+        {
+            bool isTtk;
+            if (s == null)
+            {
+                isTtk = false;
+            }
+            else
+            {
+                s = s.Replace("-", "")
+                     .Replace(" ", "")
+                     .ToUpper();
+                
+                isTtk = Regex.IsMatch(s, @"^TTK\d{4}$");
+            }
+
+            return isTtk;
         }
     }
 }

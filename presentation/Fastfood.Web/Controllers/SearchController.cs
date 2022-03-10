@@ -3,20 +3,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Fastfood.Memory;
 
 namespace Fastfood.Web.Controllers
 {
     public class SearchController : Controller
     {
-        private readonly IDishRepository dishRepository;
-        public SearchController(IDishRepository dishRepository)
+        private readonly DishService dishService;
+        public SearchController(DishService dishService)
         {
-            this.dishRepository = dishRepository;
+            this.dishService = dishService;
         }
         public IActionResult Index(string query)
         {
-            var dishes = this.dishRepository.GetAllByTitle(query);
+            var dishes = this.dishService.GetAllByQuery(query);
             return View(dishes);
         }
     }
