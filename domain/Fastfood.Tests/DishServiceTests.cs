@@ -13,12 +13,14 @@ namespace Fastfood.Tests
         [Fact]
         public void GetAllByQuery_WithTtk_CallsGetByTtk()
         {
+            var idOfTtkSearch = 1;
+            var idOfNameOrCategorySearch = 2;
             var dishRepositoryStub = new Mock<IDishRepository>();
             dishRepositoryStub.Setup(x => x.GetByTtk(It.IsAny<string>()))
-                .Returns(new[] { new Dish(1,"", "", "") });
+                .Returns(new[] { new Dish(idOfTtkSearch, "", "", "", "", 1.00m) });
 
             dishRepositoryStub.Setup(x => x.GetAllByNameOrCategory(It.IsAny<string>()))
-                .Returns(new[] { new Dish(2, "", "", "") });
+                .Returns(new[] { new Dish(idOfNameOrCategorySearch, "", "", "", "", 1.00m) });
 
             var dishService = new DishService(dishRepositoryStub.Object);
             var validTtk = "TtK 1234";
@@ -29,12 +31,14 @@ namespace Fastfood.Tests
         [Fact]
         public void GetAllByQuery_WithAuthor_CallsGetAllByNameOrCategory()
         {
+            var idOfTtkSearch = 1;
+            var idOfNameOrCategorySearch = 2;
             var dishRepositoryStub = new Mock<IDishRepository>();
             dishRepositoryStub.Setup(x => x.GetByTtk(It.IsAny<string>()))
-                .Returns(new[] { new Dish(1, "", "", "") });
+                .Returns(new[] { new Dish(idOfTtkSearch, "", "", "", "", 1.00m) });
 
             dishRepositoryStub.Setup(x => x.GetAllByNameOrCategory(It.IsAny<string>()))
-                .Returns(new[] { new Dish(2, "", "", "") });
+                .Returns(new[] { new Dish(idOfNameOrCategorySearch, "", "", "", "", 1.00m) });
 
             var dishService = new DishService(dishRepositoryStub.Object);
             var invalidTtk = "1234ttk";

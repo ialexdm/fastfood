@@ -9,15 +9,19 @@ namespace Fastfood
         public string Name { get; }
         public string Category { get; }
         public string Ttk { get; }
+        public string Description { get; }
+        public decimal Price { get; }
 
 
 
-        public Dish(int id, string name, string category, string ttk)
+        public Dish(int id, string name, string category, string ttk, string description, decimal price)
         {
             Id = id;
             Name = name;
             Category = category;
             Ttk = ttk;
+            Description = description;
+            Price = price;
         }
 
         internal static bool IsTtk(string s)
