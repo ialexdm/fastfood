@@ -10,28 +10,32 @@ namespace Fastfood.Web.Controllers
     public class CartController : Controller
     {
         private readonly IDishRepository dishRepository;
-        public CartController(IDishRepository dishRepository)
+        private readonly IOrderRepository orderRepository;
+        public CartController(IDishRepository dishRepository, IOrderRepository orderRepository)
         {
             this.dishRepository = dishRepository;
+            this.orderRepository = orderRepository;
         }
         public IActionResult Add(int id)
         {
-            var dish = dishRepository.GetById(id);
+
+            Order order;
             Cart cart;
-            if(!HttpContext.Session.TryGetCart(out cart))
+            if(HttpContext.Session.TryGetCart(out cart))
             {
-                cart = new Cart();
-            }
-            if(cart.Items.ContainsKey(id))
-            {
-                cart.Items[id]++;
-                
+                order = orderRepository.GetById(cart.OrderId);
             }
             else
             {
-                cart.Items[id] = 1;
+                order = orderRepository.Create();
+                cart = new Cart(order.Id);
             }
-            cart.Amount += dish.Price;
+            var dish = dishRepository.GetById(id);
+            order.AddItem(dish, 1);
+            orderRepository.Update(order);
+
+            cart.TotalCount = order.TotalCount;
+            cart.TotalPrice = order.TotalPrice;
 
             HttpContext.Session.Set(cart);
 
