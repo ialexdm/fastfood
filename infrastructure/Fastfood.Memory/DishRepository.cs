@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Fastfood.Memory
@@ -30,6 +31,15 @@ namespace Fastfood.Memory
                 "is a green salad of romaine lettuce and croutons dressed with lemon juice (or lime juice), olive oil, egg, Worcestershire sauce, anchovies, garlic, Dijon mustard, Parmesan cheese, and black pepper.",
                 350.00m)
         };
+
+        public Dish[] GetAllByIds(IEnumerable<int> dishIds)
+        {
+            var foundDishes = from dish in dishes
+                              join disId in dishIds on dish.Id equals disId
+                              select dish;
+
+            return foundDishes.ToArray();
+        }
 
         public Dish[] GetAllByNameOrCategory(string query)
         {
