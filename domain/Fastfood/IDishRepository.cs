@@ -11,5 +11,6 @@ namespace Fastfood
         Dish[] GetAllByNameOrCategory(string nameOrCategory);
         Dish[] GetByTtk(string ttk);
         Dish GetById(int id);
+        Dish[] GetAllByIds(IEnumerable<int> ids);
     }
 }
